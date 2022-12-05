@@ -39,7 +39,7 @@ public class Result<T> implements Serializable {
     }
 
     /**
-     * 申请胜利
+     * 响应成功
      * @param msg  返回信息
      * @param data 泛型数据
      * @param <T>  返回数据，能够不填
@@ -59,7 +59,7 @@ public class Result<T> implements Serializable {
     }
 
     /**
-     * 申请失败
+     * 响应失败
      * @param code
      * @param msg
      * @return 1.状态码（自定义） 2.返回信息（自定义）

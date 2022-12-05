@@ -1,6 +1,5 @@
-package com.example.learndemo.config;
+package com.example.security.config;
 
-import com.example.learndemo.redis.FastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -16,7 +15,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig {
 
     @Bean
-//    @SuppressWarnings(value = {"unchecked","rawtypes"})
     public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory connectionFactory){
         RedisTemplate<Object,Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);

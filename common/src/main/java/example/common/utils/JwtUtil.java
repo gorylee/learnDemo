@@ -26,57 +26,33 @@ public class JwtUtil {
      * 生成token字符串的方法
      *
      * @param id
-     * @param nickname
+     * @param userName
      * @return
      */
-    public static String getJwtToken(String id, String nickname) {
-        String JwtToken = Jwts.builder()
-                //JWT头信息
-                .setHeaderParam("typ", "JWT")
-                .setHeaderParam("alg", "HS2256")
+    public static String createToken(Long id, String userName) {
+        return Jwts.builder()
                 //设置分类；设置过期时间 一个当前时间，一个加上设置的过期时间常量
-                .setSubject("lin-user")
+//                .setSubject("user")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 //设置token主体信息，存储用户信息
-                .claim("id", id)
-                .claim("nickname", nickname)
-                //.signWith(SignatureAlgorithm.ES256, SECRET)
+                .claim("userId", id)
+                .claim("userName", userName)
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
-        return JwtToken;
     }
 
     /**
      * 判断token是否存在与有效
      *
-     * @Param jwtToken
+     * @Param token
      */
-    public static boolean checkToken(String jwtToken) {
-        if (StrUtil.isEmpty(jwtToken)) {
+    public static boolean checkToken(String token) {
+        if (StrUtil.isEmpty(token)) {
             return false;
         }
         try {
             //验证token
-            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * 判断token是否存在与有效
-     *
-     * @Param request
-     */
-    public static boolean checkToken(HttpServletRequest request) {
-        try {
-            String token = request.getHeader("token");
-            if (StrUtil.isEmpty(token)) {
-                return false;
-            }
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,19 +62,57 @@ public class JwtUtil {
     }
 
     /**
-     * 根据token获取会员id
-     *
-     * @Param request
+     * 解析token
      */
-    public static String getMemberIdByJwtToken(HttpServletRequest request) {
+    public static Claims parseToken(HttpServletRequest request) {
+
         String token = request.getHeader("token");
         if (StrUtil.isEmpty(token)) {
-            return "";
+            return null;
         }
-        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
-        Claims body = claimsJws.getBody();
-        return (String) body.get("id");
+        return Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token).getBody();
     }
 
+    /**
+     * 解析token
+     */
+    public static Claims parseToken(String token) {
+        if (StrUtil.isEmpty(token)) {
+            return null;
+        }
+        return Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token).getBody();
+    }
 
+    /**
+     * 获取过期时间
+     */
+    public static Date getExpiration(String token) {
+        Claims claims = parseToken(token);
+        return claims != null ? claims.getExpiration() : null;
+    }
+
+    /**
+     * 检查是否已过期
+     */
+    public static Boolean checkExpiration(String token) {
+        Date expiration = getExpiration(token);
+        if(expiration!=null && expiration.compareTo(new Date())>0){
+            return false;
+        }
+        return true;
+    }
+
+//    public static void main(String[] args) {
+//        // eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaW4tdXNlciIsImlhdCI6MTY3MDI0NjIwNCwiZXhwIjoxNjcwMzMyNjA0LCJpZCI6MywidXNlck5hbWUiOiJsZ3kifQ.rjZdATwWt_rpEGkRKb_aNcWcoa2bwpxDtHr1CWgpvN8
+//        String token = createToken(3L, "lgy");
+////        Claims claims = parseToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaW4tdXNlciIsImlhdCI6MTY3MDI0NjIwNCwiZXhwIjoxNjcwMzMyNjA0LCJpZCI6MywidXNlck5hbWUiOiJsZ3kifQ.rjZdATwWt_rpEGkRKb_aNcWcoa2bwpxDtHr1CWgpvN8");
+//        Claims claims = parseToken(token);
+//        Long id = claims.get("userId",Long.class);
+//        String userName = claims.get("userName",String.class);
+//        System.out.println(checkExpiration(token));
+//    }
 }
