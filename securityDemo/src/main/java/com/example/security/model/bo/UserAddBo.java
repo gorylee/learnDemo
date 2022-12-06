@@ -5,12 +5,12 @@ import lombok.Data;
 import java.sql.Blob;
 
 /**
- * @Author GoryLee
- * @Date 2022/11/15 20:40
- * @Version 1.0
+ * @Description
+ * @Author GorryLee
+ * @Date 2022/12/6
  */
 @Data
-public class UserBo {
+public class UserAddBo {
 
     private Long id;
 

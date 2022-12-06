@@ -1,9 +1,12 @@
 package com.example.security.service.impl;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.security.convert.UserConvert;
 import com.example.security.mapper.UserMapper;
+import com.example.security.model.bo.UserAddBo;
 import com.example.security.model.bo.UserBo;
 import com.example.security.model.entity.User;
 import com.example.security.service.UserService;
@@ -25,5 +28,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         User user = this.getById(query.getId());
         return user;
+    }
+
+    @Override
+    public void addUser(UserAddBo userBo) {
+        User user = UserConvert.INSTANCE.userAddBoToUser(userBo);
+        this.save(user);
     }
 }

@@ -1,27 +1,21 @@
 package com.example.security.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
+import java.io.Serializable;
+import java.sql.Blob;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
- * <p>
- * 
- * </p>
- *
  * @author GoryLee
- * @since 2022-11-14
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("m_user")
+@TableName("learn_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,18 +23,33 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String userName;
-
-    private String avatar;
-
     private String email;
+
+    private String userName;
 
     private String password;
 
-    private Integer status;
+    private String role;
 
-    private LocalDateTime created;
+    private String state;
 
-    private LocalDateTime lastLogin;
+    private String sex;
+
+    private String source;
+
+    private String avatar;
+
+    private String signature;
+
+    private Blob ext;
+
+    private Integer isDelete;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createAt;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime updateAt;
+
 
 }
