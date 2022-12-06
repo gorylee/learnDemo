@@ -85,8 +85,7 @@ public class UserController {
             redisUtil.del(key);
         }
         redisUtil.set(key,loginUser.getUser());
-//        JSONObject jsonObject = (JSONObject)redisUtil.get("token_" + loginUser.getUser().getId());
-//        User user = jsonObject.toJavaObject(User.class);
+        User user = (User)redisUtil.get("token_" + loginUser.getUser().getId());
         return Result.createSuccess(data);
 
     }
