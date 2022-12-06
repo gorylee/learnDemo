@@ -1,6 +1,7 @@
 package com.example.security.utils;
 
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     /**
      * 根据keys pattern 进行模糊匹配查询存在的key值
@@ -100,8 +101,9 @@ public class RedisUtil {
      * @param key 键
      * @return 值
      */
-    public Object get(String key) {
-        return key == null ? null : redisTemplate.opsForValue().get(key);
+    public <T>T get(String key) {
+        ValueOperations<String, T> operations = redisTemplate.opsForValue();
+        return operations.get(key);
     }
 
     /**

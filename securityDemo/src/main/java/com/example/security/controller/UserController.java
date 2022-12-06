@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,13 +47,13 @@ public class UserController {
     }
 
     /**
-     *{
-     *     "email": "12346@qi.com",
-     *     "role": "1",
-     *     "state": 1,
-     *     "userName": "lgy",
-     *     "password": "1234",
-     *     "sex": "男"
+     * {
+     * "email": "12346@qi.com",
+     * "role": "1",
+     * "state": 1,
+     * "userName": "lgy",
+     * "password": "1234",
+     * "sex": "男"
      * }
      */
     @PostMapping("/addUser")
@@ -65,7 +66,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Result<Map<String,String>> login(@RequestBody UserBo query) {
+    public Result<Map<String, String>> login(@RequestBody UserBo query) {
 
         //使用AuthenticationManager的认证接口惊醒用户认证
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(query.getUserName(), query.getPassword());
@@ -76,18 +77,25 @@ public class UserController {
         // 认证成功则通过jwt创建token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String token = JwtUtil.createToken(loginUser.getUser().getId(), loginUser.getUser().getUserName());
-        Map<String,String> data = new HashMap<>();
-        data.put("token",token);
+        Map<String, String> data = new HashMap<>();
+        data.put("token", token);
 
         // 把用户信息存入到redis
-        String key = "token_"+loginUser.getUser().getId();
-        if(redisUtil.containsKey(key)){
+        String key = "login:" + loginUser.getUser().getId();
+        if (redisUtil.containsKey(key)) {
             redisUtil.del(key);
         }
-        redisUtil.set(key,loginUser.getUser());
-        User user = (User)redisUtil.get("token_" + loginUser.getUser().getId());
+        redisUtil.set(key, loginUser);
+//        User user = (User)redisUtil.get("token_" + loginUser.getUser().getId());
         return Result.createSuccess(data);
 
     }
 
+    @GetMapping("/logout")
+    public Result<String> logout() {
+        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        redisUtil.del("login:"+user.getId());
+        return Result.createSuccess("注销成功");
+    }
 }

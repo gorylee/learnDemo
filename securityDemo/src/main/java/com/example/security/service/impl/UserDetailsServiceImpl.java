@@ -1,5 +1,6 @@
 package com.example.security.service.impl;
 
+import cn.hutool.core.collection.ListUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.security.mapper.UserMapper;
 import com.example.security.model.entity.User;
@@ -9,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @Author GoryLee
@@ -31,10 +35,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户名或者密码错误");
         }
 
-        //TODO 查询用户权限信息
+        List<String> permissions = ListUtil.toLinkedList("test", "admin");
 
         // 封装UserDetails
-        LoginUser loginUser = new LoginUser(user);
+        LoginUser loginUser = new LoginUser(user,permissions);
         return loginUser;
     }
 }
