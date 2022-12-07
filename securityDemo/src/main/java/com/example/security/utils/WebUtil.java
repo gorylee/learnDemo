@@ -19,8 +19,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URLEncoder;
@@ -261,6 +263,24 @@ public class WebUtil {
     public static String getRequestUrl() {
         HttpServletRequest request = getRequest();
         return request.getRequestURL().toString();
+    }
+
+    /**
+     * 认证授权异常处理
+     * @param response
+     * @param data
+     * @return
+     */
+    public static String renderString(HttpServletResponse response, String data){
+        try {
+            response.setStatus(200);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().println(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

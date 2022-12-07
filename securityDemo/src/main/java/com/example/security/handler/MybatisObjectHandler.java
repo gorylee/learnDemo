@@ -1,4 +1,4 @@
-package com.example.security.config;
+package com.example.security.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.example.security.utils.WebUtil;

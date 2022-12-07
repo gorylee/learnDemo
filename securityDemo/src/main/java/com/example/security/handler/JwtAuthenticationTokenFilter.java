@@ -1,7 +1,7 @@
-package com.example.security.config;
+package com.example.security.handler;
 
 import cn.hutool.core.util.StrUtil;
-import com.example.security.model.entity.User;
+import com.example.security.exception.CustomException;
 import com.example.security.model.vo.LoginUser;
 import com.example.security.utils.RedisUtil;
 import example.common.utils.JwtUtil;
@@ -45,12 +45,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             Claims claims = JwtUtil.parseToken(token);
             userId = claims.get("userId", Long.class);
         } catch (Exception e) {
-            throw new RuntimeException("非法token");
+            throw new CustomException("非法token");
         }
         // 从redis中获取用户信息
         LoginUser loginUser = redisUtil.get("login:" + userId);
         if(loginUser == null ){
-            throw new RuntimeException("用户未登录");
+            throw new CustomException("用户未登录");
         }
         // 存入SecurityContextHolder认证
         UsernamePasswordAuthenticationToken authenticationToken =

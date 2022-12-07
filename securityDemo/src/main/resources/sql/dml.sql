@@ -14,9 +14,9 @@ insert into sys_role values('2', '普通角色',   'common', 2, 2, '0', '0', 'ad
 -- 初始化-菜单信息表数据
 -- ----------------------------
 -- 一级菜单
-insert into sys_menu values('1', '系统管理', '0', '1', '#',                '',          'M', '0', '1', '', 'fa fa-gear',           'admin', sysdate(), '', null, '系统管理目录');
-insert into sys_menu values('2', '系统监控', '0', '2', '#',                '',          'M', '0', '1', '', 'fa fa-video-camera',   'admin', sysdate(), '', null, '系统监控目录');
-insert into sys_menu values('3', '系统工具', '0', '3', '#',                '',          'M', '0', '1', '', 'fa fa-bars',           'admin', sysdate(), '', null, '系统工具目录');
+insert into sys_menu values('1', '系统管理', '0', '1', '#',                '',          'M', '0', '1', 'sys:admin', 'fa fa-gear',           'admin', sysdate(), '', null, '系统管理目录');
+insert into sys_menu values('2', '系统监控', '0', '2', '#',                '',          'M', '0', '1', 'sys:monitor', 'fa fa-video-camera',   'admin', sysdate(), '', null, '系统监控目录');
+insert into sys_menu values('3', '系统工具', '0', '3', '#',                '',          'M', '0', '1', 'sys:tool', 'fa fa-bars',           'admin', sysdate(), '', null, '系统工具目录');
 
 -- ----------------------------
 -- 初始化-用户和角色关联表数据

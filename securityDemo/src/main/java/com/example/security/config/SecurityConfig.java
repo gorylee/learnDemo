@@ -1,5 +1,8 @@
 package com.example.security.config;
 
+import com.example.security.handler.AuthenticationEntryPointHandler;
+import com.example.security.handler.CustomAccessDeniedHandler;
+import com.example.security.handler.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -21,9 +26,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
+    @Autowired
+    private AuthenticationEntryPointHandler authenticationEntryPointHandler;
+
+    @Autowired
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -52,8 +62,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 除了上面的路径，其他都需要鉴权访问
                 .anyRequest().authenticated();
 
+        // 添加过滤器
         http
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+        //异常处理
+        http
+                .exceptionHandling()
+                // 认证异常处理器
+                .authenticationEntryPoint(authenticationEntryPointHandler)
+                // 授权异常处理器
+                .accessDeniedHandler(customAccessDeniedHandler);
+
+        // 添加跨域处理
+        http
+                .cors();
+
     }
 
     /**

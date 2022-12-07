@@ -3,6 +3,7 @@ package com.example.security.controller;
 import cn.hutool.core.collection.ListUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.security.exception.CustomException;
 import com.example.security.model.bo.UserAddBo;
 import com.example.security.model.bo.UserBo;
 import com.example.security.model.entity.User;
@@ -12,6 +13,7 @@ import example.common.model.Result;
 import example.common.utils.JwtUtil;
 import com.example.security.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,6 +43,7 @@ public class UserController {
     private RedisUtil redisUtil;
 
     @GetMapping("/getUser")
+    @PreAuthorize("@customExpression.hasAuthority('sys')")
     public Result<User> getUser(UserBo query) {
         User user = userService.getUser(query);
         return Result.createSuccess(user);
@@ -72,7 +75,7 @@ public class UserController {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(query.getUserName(), query.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         if (authenticate == null) {
-            throw new RuntimeException("登录失败");
+            throw new CustomException("登录失败");
         }
         // 认证成功则通过jwt创建token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
