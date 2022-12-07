@@ -1,9 +1,8 @@
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  103, 'admin', 'lgy', '1', 'lgy@163.com', '15888888888', '1', '', '$2a$10$fl.1X4NRsNcUjaTpfzb8Ve9JZR6Rgr1tmQ1HmFA720ye1VQl6T6Qm',  '0', '0',  'admin', sysdate(), '', null, '管理员');
-insert into sys_user values(2,  105, 'test',  'lee', '0', 'lgy@qq.com',  '15666666666', '1', '', '$2a$10$fl.1X4NRsNcUjaTpfzb8Ve9JZR6Rgr1tmQ1HmFA720ye1VQl6T6Qm',  '0', '0',  'admin', sysdate(), '', null, '测试员');
-
+insert into sys_user values(1, 'admin', 'lgy', '1', 'lgy@163.com', '15888888888', '1', '', '$2a$10$fl.1X4NRsNcUjaTpfzb8Ve9JZR6Rgr1tmQ1HmFA720ye1VQl6T6Qm',  '0', '0',  'admin', sysdate(),'admin', sysdate(),'管理员');
+insert into sys_user values(2, 'test',  'lee', '0', 'lgy@qq.com',  '15666666666', '1', '', '$2a$10$fl.1X4NRsNcUjaTpfzb8Ve9JZR6Rgr1tmQ1HmFA720ye1VQl6T6Qm',  '0', '0',  'admin', sysdate(),'admin', sysdate(),'测试员');
 
 -- ----------------------------
 -- 初始化-角色信息表数据

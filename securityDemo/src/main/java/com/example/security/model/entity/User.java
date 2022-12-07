@@ -1,55 +1,124 @@
 package com.example.security.model.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.sql.Blob;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @author GoryLee
+ * @author GorryLee
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("learn_user")
+@TableName("sys_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
 
-    private String email;
+    /**
+     * 用户ID
+     */
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Long userId;
 
+
+    /**
+     * 登录账号
+     */
+    private String loginName;
+
+
+    /**
+     * 用户昵称
+     */
     private String userName;
 
-    private String password;
 
-    private String role;
+    /**
+     * 用户类型（1系统用户 0注册用户）
+     */
+    private String userType;
 
-    private String state;
 
+    /**
+     * 用户邮箱
+     */
+    private String email;
+
+
+    /**
+     * 手机号码
+     */
+    private String phoneNumber;
+
+
+    /**
+     * 用户性别（0男 1女 2未知）
+     */
     private String sex;
 
-    private String source;
 
+    /**
+     * 头像路径
+     */
     private String avatar;
 
-    private String signature;
 
-    private Blob ext;
+    /**
+     * 密码
+     */
+    private String password;
 
-    private Integer isDelete;
 
+    /**
+     * 帐号状态（0正常 1停用）
+     */
+    private String status;
+
+
+    /**
+     * 删除标志（0代表存在 2代表删除）
+     */
+    private String delFlag;
+
+
+    /**
+     * 创建者
+     */
+    private String createBy;
+
+
+    /**
+     * 创建时间
+     */
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createAt;
+    private LocalDateTime createTime;
 
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime updateAt;
+
+    /**
+     * 更新者
+     */
+    private String updateBy;
+
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
+
+
+    /**
+     * 备注
+     */
+    private String remark;
 
 
 }

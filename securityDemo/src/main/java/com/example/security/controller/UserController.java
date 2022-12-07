@@ -76,12 +76,12 @@ public class UserController {
         }
         // 认证成功则通过jwt创建token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-        String token = JwtUtil.createToken(loginUser.getUser().getId(), loginUser.getUser().getUserName());
+        String token = JwtUtil.createToken(loginUser.getUser().getUserId(), loginUser.getUser().getUserName());
         Map<String, String> data = new HashMap<>();
         data.put("token", token);
 
         // 把用户信息存入到redis
-        String key = "login:" + loginUser.getUser().getId();
+        String key = "login:" + loginUser.getUser().getUserId();
         if (redisUtil.containsKey(key)) {
             redisUtil.del(key);
         }
@@ -95,7 +95,7 @@ public class UserController {
     public Result<String> logout() {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authentication.getPrincipal();
-        redisUtil.del("login:"+user.getId());
+        redisUtil.del("login:"+user.getUserId());
         return Result.createSuccess("注销成功");
     }
 }
