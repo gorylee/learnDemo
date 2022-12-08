@@ -99,7 +99,7 @@ public class WebUtil {
                 token = request.getParameter("token");
                 if(!StrUtil.isEmpty(token)) return token;
             }
-//            throw new ResultException(ResultEnum.NO_LOGIN.getKey(),"请先登录");
+//            throw new CustomException(ResultEnum.NO_LOGIN.getKey(),"请先登录");
         }
         return token;
     }
@@ -144,13 +144,13 @@ public class WebUtil {
 //    public static <T> T getCurrentUser(Class<T> clazz){
 //        Object object = RedisUtils.get(getToken());
 //        if(Objects.isNull(object)){
-//            throw new ResultException(ResultEnum.NO_LOGIN.getKey(),"请重新登录");
+//            throw new CustomException(ResultEnum.NO_LOGIN.getKey(),"请重新登录");
 //        }
 //        try{
 //            T t = clazz.cast(object);
 //            return t;
 //        }catch (Exception e){
-//            throw new ResultException(ResultEnum.NO_LOGIN.getKey(),"请重新登录");
+//            throw new CustomException(ResultEnum.NO_LOGIN.getKey(),"请重新登录");
 //        }
 //    }
 

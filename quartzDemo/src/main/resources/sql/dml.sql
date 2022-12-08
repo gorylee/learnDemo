@@ -1,0 +1,1 @@
+INSERT INTO `sys_schedule` VALUES (1, '更新信用协议状态', 'com.example.quartz.service.impl.ScheduleServiceImpl','testJob', '0/5 * * * * ? ', 1, '每5秒钟执行一次', 0, '', NULL, 0, '', NULL, 0);

@@ -5,6 +5,7 @@
     <modules>
         <module>securityDemo</module>
         <module>common</module>
+        <module>quartzDemo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
