@@ -5,6 +5,20 @@ spring:
   application:
     name: job-demo
 
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:8022/xxl-job-admin
+    accessToken: default_token777
+    executor:
+      appname: job-demo
+      address:
+      ip:
+      port: 8889
+      logpath:
+      logretentiondays: 30
+
+
 # 日志
 logging:
   config: classpath:config/logback-spring.xml
