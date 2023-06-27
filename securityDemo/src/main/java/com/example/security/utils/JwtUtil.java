@@ -1,8 +1,7 @@
-package example.common.utils;
+package com.example.security.utils;
 
 import cn.hutool.core.util.StrUtil;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 

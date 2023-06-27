@@ -1,0 +1,13 @@
+server:
+  port: 8044
+
+spring:
+  application:
+    name: job-demo
+
+# 日志
+logging:
+  config: classpath:config/logback-spring.xml
+
+
+
