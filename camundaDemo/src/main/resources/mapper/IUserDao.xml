@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.camunda.dao.IUserDao">
+    <sql id="where">
+        <where>
+            <if test="query.id != null">
+                AND id = #{query.id}
+            </if>
+            <if test="query.userName != null and query.userName != ''">
+                AND user_name = #{query.userName}
+            </if>
+            <if test="query.userRole != null and query.userRole != ''">
+                AND user_role = #{query.userRole}
+            </if>
+        </where>
+    </sql>
+    <select id="findOne" resultType="com.example.camunda.module.entity.User">
+        SELECT * FROM
+        sys_user
+        <include refid="where"/>
+        LIMIT 1
+    </select>
+    <select id="findList" resultType="com.example.camunda.module.entity.User">
+        SELECT * FROM
+        sys_user
+        <include refid="where"/>
+    </select>
+    <select id="findListAll" resultType="com.example.camunda.module.entity.User">
+        SELECT * FROM
+        sys_user
+        <include refid="where"/>
+    </select>
+</mapper>
