@@ -1,5 +1,8 @@
 package com.example.camunda.controller;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.example.camunda.module.bo.ExpenseAddBo;
 import com.example.camunda.module.bo.ExpenseQueryBo;
 import com.example.camunda.module.entity.Expense;
 import com.example.camunda.module.vo.JsonResult;
@@ -9,10 +12,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiOperationSupport;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 费用申请表控制器
@@ -28,14 +35,24 @@ public class ExpenseController {
     @Autowired
     private IExpenseService expenseService;
 
-    @ApiOperation(value = "查询费用申请表", notes = "查询费用申请表")
-    @ApiOperationSupport(author = "GoryLee")
-    @GetMapping("/get")
-    //@Permission("fi:expense:get")
-    public JsonResult<Expense> get(ExpenseQueryBo expenseQuery){
-        Expense expense = expenseService.get(expenseQuery);
-        AssertUtils.isNull(expense,"未查询到费用申请表");
-        return JsonResult.ok(expense);
+    @RequestMapping("/submit")
+    public JsonResult<?> submit(@RequestBody ExpenseAddBo expenseAddBo){
+        Expense expense = new Expense();
+        BeanUtils.copyProperties(expenseAddBo,expense);
+        expense.setApprovalStatus(1);
+        expense.setCreateTime(LocalDateTime.now());
+        expenseService.submit(expense);
+        return JsonResult.ok();
     }
 
+
+
+    @PostMapping("/approval")
+    public JsonResult<?> approval(@RequestBody ExpenseQueryBo expenseQueryBo) {
+        Expense expense = new Expense();
+        BeanUtils.copyProperties(expenseQueryBo,expense);
+        expense.setApprovalTime(LocalDateTime.now());
+        expenseService.approval(expense,expenseQueryBo);
+        return JsonResult.ok();
+    }
 }

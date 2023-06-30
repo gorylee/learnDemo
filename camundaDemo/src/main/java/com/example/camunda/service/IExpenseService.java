@@ -36,4 +36,8 @@ public interface IExpenseService extends IService<Expense> {
     * 查询所有费用申请表
     */
     List<Expense> listAll(ExpenseQueryBo expenseQuery);
+
+    void submit(Expense expense);
+
+    void approval(Expense expense, ExpenseQueryBo expenseQueryBo);
 }

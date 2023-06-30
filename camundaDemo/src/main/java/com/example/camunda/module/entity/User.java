@@ -32,7 +32,7 @@ public class User implements Serializable {
     private String userName;
 
     @ApiModelProperty(value = "用户权限：1公司，2事业部，3集团")
-    private String userRole;
+    private Integer userRole;
 
 
 }
