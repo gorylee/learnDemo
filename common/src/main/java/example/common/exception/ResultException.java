@@ -1,4 +1,4 @@
-package com.example.camunda.exception;
+package example.common.exception;
 
 /**
  * 结果异常

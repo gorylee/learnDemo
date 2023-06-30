@@ -1,8 +1,8 @@
-package com.example.camunda.exception;
+package example.common.exception;
 
 
-import com.example.camunda.module.enums.ResultEnum;
-import com.example.camunda.module.vo.JsonResult;
+import example.common.entity.JsonResult;
+import example.common.enums.ResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;

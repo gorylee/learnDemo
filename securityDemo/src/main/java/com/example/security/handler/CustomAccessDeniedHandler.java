@@ -3,7 +3,7 @@ package com.example.security.handler;
 import cn.hutool.http.HttpStatus;
 import com.alibaba.fastjson.JSON;
 import com.example.security.utils.WebUtil;
-import example.common.model.Result;
+import example.common.entity.JsonResult;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ import java.io.IOException;
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        Result<Object> result = Result.createError(HttpStatus.HTTP_FORBIDDEN, "授权失败，你没权限操作");
+        JsonResult<Object> result = JsonResult.fail(HttpStatus.HTTP_FORBIDDEN, "授权失败，你没权限操作");
         String jsonString = JSON.toJSONString(result);
         WebUtil.renderString(response,jsonString);
     }

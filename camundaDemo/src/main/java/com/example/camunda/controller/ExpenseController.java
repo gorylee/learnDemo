@@ -1,25 +1,17 @@
 package com.example.camunda.controller;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.example.camunda.module.bo.ExpenseAddBo;
 import com.example.camunda.module.bo.ExpenseQueryBo;
 import com.example.camunda.module.entity.Expense;
-import com.example.camunda.module.vo.JsonResult;
+import example.common.entity.JsonResult;
 import com.example.camunda.service.IExpenseService;
-import com.example.camunda.utils.AssertUtils;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiOperationSupport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 费用申请表控制器

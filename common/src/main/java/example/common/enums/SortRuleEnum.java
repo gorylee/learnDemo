@@ -1,28 +1,24 @@
-package com.example.camunda.module.enums;
+package example.common.enums;
+
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * 接口结果枚举
+ *  排序规则
  */
-public enum ResultEnum {
-    SUCCESS(1,"操作成功"),
-    FAIL(-1,"操作失败"),
-	NO_LOGIN(-100,"未登陆"),
-
-	FORBIDDEN(-200,"您没有权限"),
-    SYSTEM_ERROR(555,"系统异常");
-
+public enum SortRuleEnum {
+    ASC(1,"ASC"),
+    DESC(2,"DESC");
 	private Integer key;
     private String value;
-    ResultEnum(Integer key, String value) {
+    SortRuleEnum(Integer key, String value) {
         this.key = key;
         this.value = value;
     }
     
     public static String getValue(Integer key) {
-        for (ResultEnum c : ResultEnum.values()) {
+        for (SortRuleEnum c : SortRuleEnum.values()) {
             if (c.getKey().equals(key)) {
                 return c.getValue();
             }
@@ -31,7 +27,7 @@ public enum ResultEnum {
     }
     
     public static Integer getKey(String value){
-    	for (ResultEnum c : ResultEnum.values()) {
+    	for (SortRuleEnum c : SortRuleEnum.values()) {
             if (c.getValue().equals(value)) {
                 return c.getKey();
             }
@@ -41,10 +37,19 @@ public enum ResultEnum {
 
     public static Map<String,String> getOption(){
         Map<String,String> option=new LinkedHashMap<>();
-        for (ResultEnum c : ResultEnum.values()) {
+        for (SortRuleEnum c : SortRuleEnum.values()) {
             option.put(c.getKey().toString(),c.getValue());
         }
         return option;
+    }
+
+    public static SortRuleEnum getEnum(Integer key){
+        for (SortRuleEnum c : SortRuleEnum.values()) {
+            if(c.getKey().equals(key)){
+                return c;
+            }
+        }
+        return null;
     }
     
 	public Integer getKey() {
