@@ -1,7 +1,7 @@
 package com.example.camunda.utils;
 
 
-import example.common.exception.ResultException;
+import com.example.camunda.exception.ResultException;
 
 import java.util.Collection;
 import java.util.Objects;

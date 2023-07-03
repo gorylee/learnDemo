@@ -1,19 +1,21 @@
 package com.example.security.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.ListUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.example.security.exception.CustomException;
 import com.example.security.mapper.MenuMapper;
 import com.example.security.mapper.UserMapper;
 import com.example.security.model.dto.UserPermissionDto;
 import com.example.security.model.entity.User;
 import com.example.security.model.vo.LoginUser;
-import example.common.exception.ResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .eq(User::getUserName, userName);
         User user = userMapper.selectOne(wrapper);
         if (user == null) {
-            throw new ResultException("用户名或者密码错误");
+            throw new CustomException("用户名或者密码错误");
         }
 
 //        List<String> permissions = ListUtil.toLinkedList("test", "admin");

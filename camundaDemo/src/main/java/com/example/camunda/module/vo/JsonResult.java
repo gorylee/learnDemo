@@ -1,6 +1,6 @@
-package example.common.entity;
+package com.example.camunda.module.vo;
 
-import example.common.enums.ResultEnum;
+import com.example.camunda.module.enums.ResultEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

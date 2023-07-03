@@ -3,7 +3,7 @@ package com.example.security.handler;
 import cn.hutool.http.HttpStatus;
 import com.alibaba.fastjson.JSON;
 import com.example.security.utils.WebUtil;
-import example.common.entity.JsonResult;
+import example.common.model.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class AuthenticationEntryPointHandler implements AuthenticationEntryPoint
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        JsonResult<Object> result = JsonResult.fail(HttpStatus.HTTP_UNAUTHORIZED, "认证失败请重新登录");
+        Result<Object> result = Result.createError(HttpStatus.HTTP_UNAUTHORIZED, "认证失败请重新登录");
         String jsonString = JSON.toJSONString(result);
         WebUtil.renderString(response,jsonString);
     }

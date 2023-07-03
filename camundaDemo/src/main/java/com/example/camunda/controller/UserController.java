@@ -3,7 +3,7 @@ package com.example.camunda.controller;
 import com.example.camunda.module.bo.UserAddBo;
 import com.example.camunda.module.bo.UserQueryBo;
 import com.example.camunda.module.entity.User;
-import example.common.entity.JsonResult;
+import com.example.camunda.module.vo.JsonResult;
 import com.example.camunda.service.IUserService;
 import com.example.camunda.utils.AssertUtils;
 import io.swagger.annotations.Api;

@@ -1,6 +1,6 @@
 package com.example.security.utils;
 
-import example.common.exception.ResultException;
+import com.example.security.exception.CustomException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
@@ -155,7 +155,7 @@ public class RedisUtil {
      */
     public long incr(String key, long delta) {
         if (delta < 0) {
-            throw new ResultException("递增因子必须大于0");
+            throw new CustomException("递增因子必须大于0");
         }
         return redisTemplate.opsForValue().increment(key, delta);
     }
@@ -169,7 +169,7 @@ public class RedisUtil {
      */
     public long decr(String key, long delta) {
         if (delta < 0) {
-            throw new ResultException("递减因子必须大于0");
+            throw new CustomException("递减因子必须大于0");
         }
         return redisTemplate.opsForValue().increment(key, -delta);
     }

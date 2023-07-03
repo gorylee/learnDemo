@@ -1,31 +1,34 @@
-package example.common.enums;
+package example.common.model;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public enum BoolValEnum {
+/**
+ * boolean enum
+ */
+public enum BoolEnum {
 
-    FALSE(0,"否"),
-    TRUE(1,"是");
+    FALSE(0,"false"),
+    TRUE(1,"true");
 
-    private Integer key;
+	private Integer key;
     private String value;
-    BoolValEnum(Integer key, String value) {
+    BoolEnum(Integer key, String value) {
         this.key = key;
         this.value = value;
     }
-
+    
     public static String getValue(Integer key) {
-        for (BoolValEnum c : BoolValEnum.values()) {
+        for (BoolEnum c : BoolEnum.values()) {
             if (c.getKey().equals(key)) {
                 return c.getValue();
             }
         }
         return null;
     }
-
+    
     public static Integer getKey(String value){
-        for (BoolValEnum c : BoolValEnum.values()) {
+    	for (BoolEnum c : BoolEnum.values()) {
             if (c.getValue().equals(value)) {
                 return c.getKey();
             }
@@ -35,14 +38,14 @@ public enum BoolValEnum {
 
     public static Map<String,String> getOption(){
         Map<String,String> option=new LinkedHashMap<>();
-        for (BoolValEnum c : BoolValEnum.values()) {
+        for (BoolEnum c : BoolEnum.values()) {
             option.put(c.getKey().toString(),c.getValue());
         }
         return option;
     }
 
-    public static BoolValEnum getEnum(Integer key){
-        for (BoolValEnum c : BoolValEnum.values()) {
+    public static BoolEnum getEnum(Integer key){
+        for (BoolEnum c : BoolEnum.values()) {
             if(c.getKey().equals(key)){
                 return c;
             }
@@ -50,16 +53,17 @@ public enum BoolValEnum {
         return null;
     }
 
-    public Integer getKey() {
-        return key;
-    }
-    public void setKey(Integer key) {
-        this.key = key;
-    }
-    public String getValue() {
-        return value;
-    }
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public Integer getKey() {
+		return key;
+	}
+	public void setKey(Integer key) {
+		this.key = key;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 }

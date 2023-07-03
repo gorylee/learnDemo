@@ -1,14 +1,17 @@
 package com.example.security.controller;
 
+import cn.hutool.core.collection.ListUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.example.security.exception.CustomException;
 import com.example.security.model.bo.UserAddBo;
 import com.example.security.model.bo.UserBo;
 import com.example.security.model.entity.User;
 import com.example.security.model.vo.LoginUser;
 import com.example.security.service.UserService;
-import com.example.security.utils.JwtUtil;
+import example.common.model.Result;
+import example.common.utils.JwtUtil;
 import com.example.security.utils.RedisUtil;
-import example.common.entity.JsonResult;
-import example.common.exception.ResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,9 +44,9 @@ public class UserController {
 
     @GetMapping("/getUser")
     @PreAuthorize("@customExpression.hasAuthority('sys')")
-    public JsonResult<User> getUser(UserBo query) {
+    public Result<User> getUser(UserBo query) {
         User user = userService.getUser(query);
-        return JsonResult.ok(user);
+        return Result.createSuccess(user);
     }
 
     /**
@@ -57,22 +60,22 @@ public class UserController {
      * }
      */
     @PostMapping("/addUser")
-    public JsonResult<String> addUser(@RequestBody UserAddBo userBo) {
+    public Result<String> addUser(@RequestBody UserAddBo userBo) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String password = passwordEncoder.encode(userBo.getPassword());
         userBo.setPassword(password);
         userService.addUser(userBo);
-        return JsonResult.ok("添加成功");
+        return Result.createSuccess("添加成功");
     }
 
     @PostMapping("/login")
-    public JsonResult<Map<String, String>> login(@RequestBody UserBo query) {
+    public Result<Map<String, String>> login(@RequestBody UserBo query) {
 
         //使用AuthenticationManager的认证接口惊醒用户认证
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(query.getUserName(), query.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         if (authenticate == null) {
-            throw new ResultException("登录失败");
+            throw new CustomException("登录失败");
         }
         // 认证成功则通过jwt创建token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
@@ -87,15 +90,15 @@ public class UserController {
         }
         redisUtil.set(key, loginUser);
 //        User user = (User)redisUtil.get("token_" + loginUser.getUser().getId());
-        return JsonResult.ok(data);
+        return Result.createSuccess(data);
 
     }
 
     @GetMapping("/logout")
-    public JsonResult<String> logout() {
+    public Result<String> logout() {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authentication.getPrincipal();
         redisUtil.del("login:"+user.getUserId());
-        return JsonResult.ok("注销成功");
+        return Result.createSuccess("注销成功");
     }
 }

@@ -3,13 +3,13 @@ package com.example.quartz.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.quartz.exception.CustomException;
 import com.example.quartz.job.ScheduleJob;
 import com.example.quartz.mapper.IScheduleMapper;
 import com.example.quartz.model.bo.ScheduleQueryBo;
 import com.example.quartz.model.entity.Schedule;
 import com.example.quartz.service.IScheduleService;
-import example.common.enums.BoolEnum;
-import example.common.exception.ResultException;
+import example.common.model.BoolEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,12 +103,12 @@ public class ScheduleServiceImpl extends ServiceImpl<IScheduleMapper, Schedule> 
         if(enabled){
             try{
                 if(scheduler.checkExists(getJobKey(schedule))){
-                    throw new ResultException("已存在任务调度:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
+                    throw new CustomException("已存在任务调度:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
                 }
                 scheduler.scheduleJob(getJobDetail(schedule),getCronTrigger(schedule));
             }catch (Exception e){
                 log.error("添加任务失败：[class={}, method={}]", schedule.getClassName(), schedule.getMethodName(),e);
-                throw new ResultException("任务添加失败:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
+                throw new CustomException("任务添加失败:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
             }
 
         }
@@ -128,7 +128,7 @@ public class ScheduleServiceImpl extends ServiceImpl<IScheduleMapper, Schedule> 
             }
         }catch (Exception e){
             log.error("移除任务失败：[class={}, method={}]", schedule.getClassName(), schedule.getMethodName(),e);
-            throw new ResultException("移除任务失败:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
+            throw new CustomException("移除任务失败:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
         }
     }
 
@@ -179,7 +179,7 @@ public class ScheduleServiceImpl extends ServiceImpl<IScheduleMapper, Schedule> 
                 }
             }catch (Exception e){
                 log.error("临时执行任务失败：[class={}, method={}]", schedule.getClassName(), schedule.getMethodName(),e);
-                throw new ResultException("临时执行任务失败:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
+                throw new CustomException("临时执行任务失败:".concat(schedule.getClassName()).concat(".").concat(schedule.getMethodName()));
             }
 
         }
@@ -221,7 +221,7 @@ public class ScheduleServiceImpl extends ServiceImpl<IScheduleMapper, Schedule> 
     public void edit(Schedule schedule) {
         Schedule scheduleOld = this.getById(schedule.getId());
         if(scheduleOld==null){
-            throw new ResultException("定时任务不存在"+schedule.getId());
+            throw new CustomException("定时任务不存在"+schedule.getId());
         }
         dao.updateById(schedule);
         if(enabled){

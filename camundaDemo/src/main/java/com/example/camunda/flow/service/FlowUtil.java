@@ -3,7 +3,7 @@ package com.example.camunda.flow.service;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
-import example.common.exception.ResultException;
+import com.example.camunda.exception.ResultException;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RepositoryService;
