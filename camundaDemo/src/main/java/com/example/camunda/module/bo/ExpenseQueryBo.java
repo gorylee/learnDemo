@@ -1,5 +1,7 @@
 package com.example.camunda.module.bo;
 
+import com.example.camunda.module.enums.ExpenseApprovalStatusEnum;
+import example.common.annotation.ValidateEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,6 +26,7 @@ public class ExpenseQueryBo extends BaseQueryBo{
 
 
     @ApiModelProperty(value = "审核状态（0待提交,1审核中,2审核通过,3驳回）")
+    @ValidateEnum(enumClass = ExpenseApprovalStatusEnum.class,enumValues = {1,2},message = "枚举值不正确")
     private Integer approvalStatus;
 
 

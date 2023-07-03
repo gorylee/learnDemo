@@ -48,7 +48,7 @@ public class ExpenseController {
 
 
     @PostMapping("/approval")
-    public JsonResult<?> approval(@RequestBody ExpenseQueryBo expenseQueryBo) {
+    public JsonResult<?> approval(@RequestBody @Valid  ExpenseQueryBo expenseQueryBo) {
         Expense expense = new Expense();
         BeanUtils.copyProperties(expenseQueryBo,expense);
         expense.setApprovalTime(LocalDateTime.now());
