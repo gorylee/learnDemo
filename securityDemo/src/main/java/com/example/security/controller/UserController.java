@@ -1,8 +1,5 @@
 package com.example.security.controller;
 
-import cn.hutool.core.collection.ListUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.example.security.exception.CustomException;
 import com.example.security.model.bo.UserAddBo;
 import com.example.security.model.bo.UserBo;
@@ -10,7 +7,6 @@ import com.example.security.model.entity.User;
 import com.example.security.model.vo.LoginUser;
 import com.example.security.service.UserService;
 import example.common.model.Result;
-import example.common.utils.JwtUtil;
 import com.example.security.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

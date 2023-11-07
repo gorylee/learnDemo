@@ -4,7 +4,6 @@ import cn.hutool.core.util.StrUtil;
 import com.example.security.exception.CustomException;
 import com.example.security.model.vo.LoginUser;
 import com.example.security.utils.RedisUtil;
-import example.common.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
