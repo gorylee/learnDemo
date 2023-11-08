@@ -5,6 +5,26 @@ spring:
   application:
     name: job-demo
 
+  mail:
+    host: smtp.163.com #smtp服务器主机（163的）
+    port: 25 # 连接邮件服务器端口(默认SMTP 25 POP 110)
+    protocol: smtp # 连接协议(默认SMTP)
+    username: gorylee777@163.com  # 登录服务器邮箱账号
+    password: ORQTFRLKZCZGLLXQ # 登录服务器邮箱授权码（不是邮箱密码，这个是我们开通SMTP、POP时得到的授权码）
+    default-encoding: UTF-8 # 编码
+    test-connection: false # 是否测试连接
+    properties:
+      mail:
+        smtp:
+          from: gorylee777@163.com #默认发送方邮箱账号（当程序未指定发件人邮箱则默认取这个）
+          auth: true # 开启权限认证
+          timeout: 25000 # 邮件接收时间的限制
+          connectiontimeout: 25000 # 连接时间的限制
+          writetimeout: 25000 # 邮件发送时间的限制（毫秒）
+        debug: true # 日志打印，邮件发送过程的日志会被输出
+  thymeleaf:
+    cache: false
+
 xxl:
   job:
     admin:

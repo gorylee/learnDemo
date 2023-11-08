@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>邮箱验证</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+<!-- 头部 -->
+<div style="padding: 10px; background-color: #393D49;">
+    <h2 style="color: #FFFFFF; margin: 0px;"></h2>
+</div>
+<!-- 内容 -->
+<div style="padding-top: 10px; padding-bottom: 10px;">
+    <div style="background-color: snow; padding: 20px;">
+        <div>
+            <h3>尊敬的用户：您好！</h3>
+            <p>说明：您现在正在进行敏感操作，为了确保您的账户安全，我们将通过邮件对您进行身份验证。</p>
+            <p th:text="${message}"></p>
+            <div>
+                <h4>本次的验证码为：</h4>
+                <div style="background-color: #EBEEF5; padding: 10px;">
+                    <h3 th:text="${code}"></h3>
+                </div>
+                <h4>有效期为5分钟</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 页底 -->
+<div style="padding: 10px; text-align: center; background-color: #2F4056;">
+    <p style="margin: 0px; color: #FFFFFF;"></p>
+</div>
+
+</body>
+</html>
