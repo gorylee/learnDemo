@@ -10,7 +10,7 @@ spring:
     port: 25 # 连接邮件服务器端口(默认SMTP 25 POP 110)
     protocol: smtp # 连接协议(默认SMTP)
     username: gorylee777@163.com  # 登录服务器邮箱账号
-    password: ORQTFRLKZCZGLLXQ # 登录服务器邮箱授权码（不是邮箱密码，这个是我们开通SMTP、POP时得到的授权码）
+    password: ORQTFXQ # 登录服务器邮箱授权码（不是邮箱密码，这个是我们开通SMTP、POP时得到的授权码）
     default-encoding: UTF-8 # 编码
     test-connection: false # 是否测试连接
     properties:

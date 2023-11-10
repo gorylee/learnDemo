@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>邮箱验证</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+<!-- 头部 -->
+<div style="padding: 10px; background-color: #393D49;">
+    <h2 style="color: #FFFFFF; margin: 0px;"></h2>
+</div>
+<!-- 内容 -->
+<div style="padding-top: 10px; padding-bottom: 10px;">
+    <div style="background-color: snow">
+        <div>
+            <div>&emsp;<span th:text="${customerName}"></span>:</div>
+            <div>&emsp;&emsp;&emsp;你好,我们已经为您开具了电子发票,</div>
+            <div>&emsp;&emsp;&emsp;发票号：<span th:text="${invoiceNo}"></span></div>
+            <div>&emsp;&emsp;&emsp;开票金额：<span th:text="${invoiceAmount}"></span></div>
+            <div>&emsp;&emsp;&emsp;开票日期：<span th:text="${invoiceDate}"></span></div>
+            <div>&emsp;&emsp;&emsp;请注意查收。</div>
+            <div>&emsp;&emsp;&emsp;请自行下载：<a  th:href="@{${invoiceUrl}}"><span th:text="${invoiceUrl}"></span></a></div>
+            <div>&emsp;&emsp;&emsp;如有发票问题，请联系业务员，我们会尽快给您解决!!请不要回复此邮件!!!</div>
+        </div>
+    </div>
+</div>
+<!-- 页底 -->
+<div style="padding: 10px; text-align: center; background-color: #2F4056;">
+    <p style="margin: 0px; color: #FFFFFF;"></p>
+</div>
+
+</body>
+</html>

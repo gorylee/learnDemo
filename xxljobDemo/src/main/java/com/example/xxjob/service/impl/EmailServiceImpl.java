@@ -82,7 +82,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
-            String mail = templateEngine.process("mailtemplate.html", context);
+            String mail = templateEngine.process("invoiceTemplate.html", context);
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);

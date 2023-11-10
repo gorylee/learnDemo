@@ -38,14 +38,17 @@ public class EmailController {
 
     @RequestMapping("/sendTemplateMail")
     public Boolean sendTemplateMail(){
-        String from = "gorylee777@163.com";
+        String from = "xilongfp@xilongs.com";
         String to = "13631450638@163.com";
         String subject = "这是模板邮件的标题";
         String message = "详情：您正在尝试进行登录操作，若非是您本人的行为，请忽略!";
         String code = "123456789";
         Context context = new Context();
-        context.setVariable("message", message);
-        context.setVariable("code", code);
+        context.setVariable("customerName", "广东大发发有限公司");
+        context.setVariable("invoiceNo", "123456798");
+        context.setVariable("invoiceAmount", "85963");
+        context.setVariable("invoiceDate", "2023年8月9日");
+        context.setVariable("invoiceUrl", "https://youliao.yuque.com/os7ke5/xmyii6/ldh3ud1rrgvxo6pw");
         return emailService.sendTemplateMail(from, to, subject, context );
     }
 }
