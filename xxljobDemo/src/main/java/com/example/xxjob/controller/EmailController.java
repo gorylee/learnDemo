@@ -19,8 +19,8 @@ public class EmailController {
 
     @RequestMapping("/sendSimpleMail")
     public String sendSimpleMail(){
-        String from = "gorylee777@163.com";
-        String to = "13631450638@163.com";
+        String from = "localhost777@163.com";
+        String to = "1363222638@163.com";
         String subject = "这是简单邮件的标题";
         String text = "这是简单邮件的内容";
         emailService.sendSimpleMail(from, to, subject, text);
@@ -29,7 +29,7 @@ public class EmailController {
 
     @RequestMapping("/sendMimeMail")
     public Boolean sendMimeMail(){
-        String from = "gorylee777@163.com";
+        String from = "localhost777@163.com";
         String to = "13631450638@163.com";
         String subject = "这是附件邮件的标题";
         String text = "这是附件邮件的内容";
@@ -38,7 +38,7 @@ public class EmailController {
 
     @RequestMapping("/sendTemplateMail")
     public Boolean sendTemplateMail(){
-        String from = "xilongfp@xilongs.com";
+        String from = "localhost777@163.com";
         String to = "13631450638@163.com";
         String subject = "这是模板邮件的标题";
         String message = "详情：您正在尝试进行登录操作，若非是您本人的行为，请忽略!";
