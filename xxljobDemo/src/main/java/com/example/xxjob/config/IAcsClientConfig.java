@@ -1,13 +1,13 @@
-package com.example.xxjob.config;
-
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+//package com.example.xxjob.config;
+//
+//import com.aliyuncs.DefaultAcsClient;
+//import com.aliyuncs.IAcsClient;
+//import com.aliyuncs.profile.DefaultProfile;
+//import com.aliyuncs.profile.IClientProfile;
+//import lombok.extern.slf4j.Slf4j;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
 
 /**
  * @Description
