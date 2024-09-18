@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbatch.mapper.UserMapper">
+
+    <insert id="saveUserTempBatch" parameterType="java.util.List">
+        INSERT INTO user_temp (id, name, age, addr) VALUES
+        <foreach collection="userList" item="user" separator=",">
+            (#{user.id}, #{user.name}, #{user.age}, #{user.addr})
+        </foreach>
+    </insert>
+
+    <select id="truncateAll" >
+        truncate user
+    </select>
+
+    <select id="truncateAllTemp" >
+        truncate user_temp
+    </select>
+
+    <insert id="saveUserTemp" >
+        INSERT INTO user_temp (id, name, age, addr) VALUES (#{id}, #{name}, #{age},#{addr});
+    </insert>
+    <insert id="saveUser" >
+        INSERT INTO user (id, name, age, addr) VALUES (#{id}, #{name}, #{age},#{addr});
+    </insert>
+
+    <select id="selectUserTempList" resultType="com.example.springbatch.entity.User">
+        select * from user_temp where id between #{from} and #{to} limit #{_pagesize} offset #{_skiprows}
+    </select>
+</mapper>

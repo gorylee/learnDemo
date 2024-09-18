@@ -8,6 +8,7 @@
         <module>quartzDemo</module>
         <module>xxljobDemo</module>
         <module>camundaDemo</module>
+        <module>springbatchDemo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

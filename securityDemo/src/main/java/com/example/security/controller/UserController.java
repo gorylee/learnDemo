@@ -6,6 +6,7 @@ import com.example.security.model.bo.UserBo;
 import com.example.security.model.entity.User;
 import com.example.security.model.vo.LoginUser;
 import com.example.security.service.UserService;
+import com.example.security.utils.JwtUtil;
 import example.common.model.Result;
 import com.example.security.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
