@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: spring-batch
+    name: spring-batch-demo
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,6 +19,18 @@ job:
   data:
     path: D:\workCode2\learnDemo\
 
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:8022/xxl-job-admin
+    accessToken: default_token777
+    executor:
+      appname: spring-batch-demo
+      address:
+      ip:
+      port: 8890
+      logpath:
+      logretentiondays: 30
 
 # 日志
 logging:
