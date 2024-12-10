@@ -99,7 +99,7 @@ public class Goods implements Serializable {
     private Integer isRecommend;//是否推荐
     private Integer recommendSort;//推荐/新品排序
     @Deprecated
-    private Integer cateType;//业务类型：1-原料 2-试剂
+    private Integer cateType;
     private String cateTypeId;//前台分类类型
     private Integer ediStoreRecommend;//edi店铺推荐排序
 
@@ -116,7 +116,7 @@ public class Goods implements Serializable {
     private Date checkPassTime;//审核通过时间
     private Date recoverTime;//回收时间
     private String forinvname;//外名名称
-    private Date syncTime;//最新NC同步时间
+    private Date syncTime;
     private String pkInvcl;//存货分类主键
     private String invclasscode;//分类编码
     private String invclassname;//分类名称
@@ -124,7 +124,7 @@ public class Goods implements Serializable {
 
 
     private Integer ctrlArea;//管控区域
-    private Integer isPhenixin;//是否四氯化碳
+    private Integer isPhenixin;
     private Long priceRuleId;//样品定价规则id
     private Long cityId;//城市id
     private String city;//城市名称
@@ -135,7 +135,7 @@ public class Goods implements Serializable {
     private String prodline; //产品线
     private String def15;//产品线属性
 
-    private String pkTaxitemsName;//NC字段税目税率名称
+    private String pkTaxitemsName;
 
     private Long relateGoodsId;
 

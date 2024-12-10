@@ -16,14 +16,14 @@ public enum GoodsEsEnum {
     NAME_JOIN_("nameJoin_"),//商品别名(去掉特殊符号，然后拆分成：中文 英文 数字，用"_"连接)
 
     CAS("cas"),    //CAS号
-    CAS_REMOVE_SPECIAL("casRemoveSpecial"), //CAS号去掉特殊符号，例如：cas:7681-38-1 -> 7681381
+    CAS_REMOVE_SPECIAL("casRemoveSpecial"),
 
     KEY_NAMES("keyNames"), //规格
     KEY_NAMES_JOIN_("keyNamesJoin_"), //规格(去掉特殊符号，然后拆分成：中文 英文 数字，用"_"连接)
 
     TYPE("type"),  //商品类型(0:普通商品,1:易制爆,2:易制毒,3:易制毒+易制爆,4:普通危险品)
-    CATE_TYPE("cateType"),// 业务类型：1-原料 2-试剂
-    CATE_TYPE_ID_SET("cateTypeIdSet"),// 业务类型：1-原料 2-试剂 3-贵金属 4-橡塑
+    CATE_TYPE("cateType"),
+    CATE_TYPE_ID_SET("cateTypeIdSet"),
     SOURCE_ID("sourceId"),// 商品来源ID （入驻店铺的商品）
 
     ONE_BCATE_ID("oneBcateId"), //店铺1级分类ID
@@ -64,7 +64,7 @@ public enum GoodsEsEnum {
     STORE_RECOMMEND_SORT("storeRecommendSort"),//店铺推荐排序
     IS_STORE_RECOMMEND("isStoreRecommend"),    //店铺推荐
 
-    EDI_STORE_RECOMMEND("ediStoreRecommend"), //店铺推荐：现货大厅、样品商城的商品列表首页需要包含至少5家店铺的商品 https://www.tapd.cn/40094791/s/1029420
+    EDI_STORE_RECOMMEND("ediStoreRecommend"),
 
     STATUS_MODIFY_TIME("statusModifyTime"),
     STATUS("status"),  //状态

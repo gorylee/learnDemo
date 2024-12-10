@@ -2,14 +2,17 @@ package com.example.esdemo.controller;
 
 import com.example.esdemo.model.bo.GoodsQueryBo;
 import com.example.esdemo.model.dto.GoodsEs;
+import com.example.esdemo.model.dto.GoodsEsPage;
 import com.example.esdemo.model.entity.Goods;
 import com.example.esdemo.service.GoodsEsService;
 import com.example.esdemo.service.GoodsService;
 import example.common.model.Result;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.expression.Ids;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author GoryLee
@@ -59,5 +62,14 @@ public class GoodsController {
         }
         goodsEsService.saveGoodsEsAll(queryBo.getIds());
         return Result.createSuccess();
+    }
+
+    /**
+     * 根据条件查询商品信息
+     */
+    @RequestMapping("/list")
+    public Result<GoodsEsPage<GoodsEs>> list(GoodsQueryBo queryBo) {
+        GoodsEsPage<GoodsEs> pageGoodsEs = goodsEsService.findPage(queryBo);
+        return Result.createSuccess(pageGoodsEs);
     }
 }

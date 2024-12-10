@@ -1,6 +1,8 @@
 package com.example.esdemo.service;
 
+import com.example.esdemo.model.bo.GoodsQueryBo;
 import com.example.esdemo.model.dto.GoodsEs;
+import com.example.esdemo.model.dto.GoodsEsPage;
 import com.example.esdemo.model.entity.Goods;
 
 import java.util.Collection;
@@ -30,4 +32,6 @@ public interface GoodsEsService {
      * @param goodsList 商品对象
      */
     void saveBatch(Collection<Goods> goodsList);
+
+    GoodsEsPage<GoodsEs> findPage(GoodsQueryBo queryBo);
 }
