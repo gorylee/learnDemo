@@ -1,0 +1,50 @@
+server:
+  port: 8066
+
+spring:
+#  application:
+#    name: es
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/learn_demo?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-idle: 2000
+        min-idle: 2000
+        max-active: 2000
+        max-wait: 1000
+    database: 0
+  cache:
+    redis:
+      time-to-live: 86400
+
+  elasticsearch:
+
+es:
+  uris: http://localhost:9200
+  username: elastic
+  password: 123456
+  index-alias:
+    goods: gd_goods_alias_test    #商品索引别名
+
+# 日志
+logging:
+  config: classpath:config/logback-spring.xml
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    call-setters-on-nulls: true
