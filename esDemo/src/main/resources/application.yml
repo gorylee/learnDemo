@@ -26,8 +26,6 @@ spring:
     redis:
       time-to-live: 86400
 
-  elasticsearch:
-
 es:
   uris: http://localhost:9200
   username: elastic
